@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function CtaBand() {
   return (
     <section className="cta-band">
@@ -15,7 +17,7 @@ export default function CtaBand() {
           government paperwork a one-click task.
         </p>
         <div className="cta-actions">
-          <a href="#" className="btn-hero">
+          <Link href="/auth/signup" className="btn-hero">
             Get started free
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
               <path
@@ -26,10 +28,10 @@ export default function CtaBand() {
                 strokeLinejoin="round"
               />
             </svg>
-          </a>
-          <a href="#" className="btn-hero-ghost">
+          </Link>
+          <Link href="/auth/signin" className="btn-hero-ghost">
             Talk to sales
-          </a>
+          </Link>
         </div>
         <p className="cta-fine">
           No credit card · 14-day Pro trial · SOC 2 certified
