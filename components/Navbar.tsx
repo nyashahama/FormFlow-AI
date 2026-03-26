@@ -81,10 +81,10 @@ export default function Navbar() {
       </ul>
 
       <div className="nav-right">
-        <a href="#" className="btn-nav-ghost">
+        <Link href="/auth/signin" className="btn-nav-ghost">
           Sign in
-        </a>
-        <a href="#" className="btn-nav-cta">
+        </Link>
+        <Link href="/auth/signup" className="btn-nav-cta">
           Start free
           <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
             <path
@@ -95,7 +95,7 @@ export default function Navbar() {
               strokeLinejoin="round"
             />
           </svg>
-        </a>
+        </Link>
       </div>
     </nav>
   );
