@@ -2,18 +2,29 @@
 
 import { useState } from "react";
 
-const navItems = [
-  { icon: "grid", label: "Overview", active: true, badge: null },
+const mainItems = [
+  { icon: "grid", label: "Overview", badge: null, section: "Main" },
   { icon: "list", label: "My Forms", badge: "4", hot: true },
   { icon: "clock", label: "In Progress", badge: "2" },
   { icon: "check", label: "Submitted", badge: null },
   { icon: "star", label: "AI Assistant", badge: null, section: "Tools" },
-  { icon: "database", label: "Data Sources", badge: "6", section: "Tools" },
-  { icon: "file", label: "Audit Trail", badge: null, section: "Tools" },
-  { icon: "grid", label: "Integrations", badge: null, section: "Tools" },
-  { icon: "user", label: "Profile", section: "Account" },
-  { icon: "credit-card", label: "Billing", section: "Account" },
+  { icon: "database", label: "Data Sources", badge: "6" },
+  { icon: "file", label: "Audit Trail", badge: null },
+  { icon: "grid-sharp", label: "Integrations", badge: null },
 ];
+
+const accountItems = [
+  { icon: "user", label: "Profile", badge: null, section: "Account" },
+  { icon: "credit-card", label: "Billing", badge: null },
+];
+
+type NavItem = {
+  icon: string;
+  label: string;
+  badge?: string | null;
+  hot?: boolean;
+  section?: string;
+};
 
 export default function Sidebar() {
   const [active, setActive] = useState("Overview");
@@ -56,6 +67,16 @@ export default function Sidebar() {
               width="5"
               height="5"
               rx="1.5"
+              stroke="currentColor"
+              strokeWidth="1.2"
+            />
+          </svg>
+        );
+      case "grid-sharp":
+        return (
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <path
+              d="M2 2h4v4H2zM8 2h4v4H8zM2 8h4v4H2zM8 8h4v4H8z"
               stroke="currentColor"
               strokeWidth="1.2"
             />
@@ -200,36 +221,43 @@ export default function Sidebar() {
     }
   };
 
-  let currentSection: string | null = null;
+  const renderGroup = (items: NavItem[]) => {
+    let renderedSection: string | null = null;
+    return items.map((item, idx) => {
+      const showSection = !!item.section && item.section !== renderedSection;
+      if (showSection) renderedSection = item.section!;
+      return (
+        <div key={idx}>
+          {showSection && <div className="sidebar-section">{item.section}</div>}
+          <div
+            className={`nav-item ${active === item.label ? "active" : ""}`}
+            onClick={() => setActive(item.label)}
+          >
+            {renderIcon(item.icon)}
+            {item.label}
+            {item.badge && (
+              <span className={`nav-badge ${item.hot ? "hot" : ""}`}>
+                {item.badge}
+              </span>
+            )}
+          </div>
+        </div>
+      );
+    });
+  };
 
   return (
     <nav className="sidebar">
-      {navItems.map((item, idx) => {
-        const showSectionHeader =
-          item.section && item.section !== currentSection;
-        if (showSectionHeader) currentSection = item.section;
+      {/* Main + Tools nav items */}
+      {renderGroup(mainItems)}
 
-        return (
-          <div key={idx}>
-            {showSectionHeader && (
-              <div className="sidebar-section">{item.section}</div>
-            )}
-            <div
-              className={`nav-item ${active === item.label ? "active" : ""}`}
-              onClick={() => setActive(item.label)}
-            >
-              {renderIcon(item.icon)}
-              {item.label}
-              {item.badge && (
-                <span className={`nav-badge ${item.hot ? "hot" : ""}`}>
-                  {item.badge}
-                </span>
-              )}
-            </div>
-          </div>
-        );
-      })}
-      <div className="sidebar-spacer"></div>
+      {/* Flex spacer — must be a direct child of the sidebar flex column to push Account down */}
+      <div className="sidebar-spacer" />
+
+      {/* Account section pinned to bottom */}
+      {renderGroup(accountItems)}
+
+      {/* User profile card */}
       <div className="sidebar-user">
         <div className="avatar" style={{ width: 32, height: 32, fontSize: 12 }}>
           JD
