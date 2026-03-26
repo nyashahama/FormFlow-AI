@@ -63,8 +63,8 @@ body::before {
   background-size: 180px 180px;
 }
 
-/* ── NAV ── */
-nav {
+/* ── NAV ── (marketing pages only — scoped to avoid bleeding into dashboard sidebar) */
+nav:not(.sidebar) {
   position: fixed;
   top: 0;
   left: 0;
@@ -76,7 +76,7 @@ nav {
   padding: 18px 48px;
   transition: all 0.4s ease;
 }
-nav.scrolled {
+nav:not(.sidebar).scrolled {
   background: rgba(5, 5, 7, 0.75);
   backdrop-filter: blur(20px) saturate(1.4);
   border-bottom: 1px solid var(--line);
@@ -2060,18 +2060,19 @@ footer {
   font-size: 22px;
   flex-shrink: 0;
 }
-.src-name {
+/* Scoped to demo step 2 source cards to avoid clashing with dashboard DataSources */
+.source-card .src-name {
   font-size: 13px;
   font-weight: 500;
   color: var(--smoke);
   margin-bottom: 2px;
 }
-.src-sub {
+.source-card .src-sub {
   font-family: var(--mono);
   font-size: 10.5px;
   color: var(--ghost-2);
 }
-.src-status {
+.source-card .src-status {
   margin-left: auto;
   flex-shrink: 0;
 }
@@ -2090,7 +2091,7 @@ footer {
   }
 }
 
-.src-ok {
+.source-card .src-ok {
   width: 20px;
   height: 20px;
   border-radius: 50%;
