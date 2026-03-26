@@ -6,6 +6,9 @@ export const metadata: Metadata = {
   title: "FormFlow AI — Government Forms, Automated",
   description:
     "FormFlow reads any government form, pulls your data from linked accounts, and files it for you.",
+  icons: {
+    icon: "./formflow_app_icon.svg",
+  },
 };
 
 export default function RootLayout({
