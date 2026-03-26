@@ -1,15 +1,42 @@
 "use client";
 
 import { useState, Fragment } from "react";
+import { usePathname, useRouter } from "next/navigation";
 
-// Section headers and nav items interleaved exactly as they appear in the HTML.
-// The spacer lives between the Tools block and the Account section.
 const TOP_ITEMS = [
   { type: "section", label: "Main" },
-  { type: "item", icon: "grid", label: "Overview", badge: null, hot: false },
-  { type: "item", icon: "list", label: "My Forms", badge: "4", hot: true },
-  { type: "item", icon: "clock", label: "In Progress", badge: "2", hot: false },
-  { type: "item", icon: "check", label: "Submitted", badge: null, hot: false },
+  {
+    type: "item",
+    icon: "grid",
+    label: "Overview",
+    badge: null,
+    hot: false,
+    href: "/dashboard",
+  },
+  {
+    type: "item",
+    icon: "list",
+    label: "My Forms",
+    badge: "4",
+    hot: true,
+    href: "/dashboard/forms",
+  },
+  {
+    type: "item",
+    icon: "clock",
+    label: "In Progress",
+    badge: "2",
+    hot: false,
+    href: "/dashboard/in-progress",
+  },
+  {
+    type: "item",
+    icon: "check",
+    label: "Submitted",
+    badge: null,
+    hot: false,
+    href: "/dashboard/submitted",
+  },
   { type: "section", label: "Tools" },
   {
     type: "item",
@@ -17,6 +44,7 @@ const TOP_ITEMS = [
     label: "AI Assistant",
     badge: null,
     hot: false,
+    href: "/dashboard/ai",
   },
   {
     type: "item",
@@ -24,26 +52,43 @@ const TOP_ITEMS = [
     label: "Data Sources",
     badge: "6",
     hot: false,
+    href: "/dashboard/data-sources",
   },
-  { type: "item", icon: "file", label: "Audit Trail", badge: null, hot: false },
+  {
+    type: "item",
+    icon: "file",
+    label: "Audit Trail",
+    badge: null,
+    hot: false,
+    href: "/dashboard/audit",
+  },
   {
     type: "item",
     icon: "grid-sharp",
     label: "Integrations",
     badge: null,
     hot: false,
+    href: "/dashboard/integrations",
   },
 ] as const;
 
 const BOTTOM_ITEMS = [
   { type: "section", label: "Account" },
-  { type: "item", icon: "user", label: "Profile", badge: null, hot: false },
+  {
+    type: "item",
+    icon: "user",
+    label: "Profile",
+    badge: null,
+    hot: false,
+    href: "/dashboard/profile",
+  },
   {
     type: "item",
     icon: "credit-card",
     label: "Billing",
     badge: null,
     hot: false,
+    href: "/dashboard/billing",
   },
 ] as const;
 
@@ -255,14 +300,15 @@ type ItemEntry = {
   label: string;
   badge: string | null;
   hot: boolean;
+  href: string;
 };
 type SectionEntry = { type: "section"; label: string };
 type Entry = ItemEntry | SectionEntry;
 
 function renderEntries(
   entries: readonly Entry[],
-  active: string,
-  onSelect: (label: string) => void,
+  pathname: string,
+  onNavigate: (href: string) => void,
 ) {
   return entries.map((entry, i) => {
     if (entry.type === "section") {
@@ -272,11 +318,14 @@ function renderEntries(
         </div>
       );
     }
+    const isActive =
+      pathname === entry.href ||
+      (entry.href !== "/dashboard" && pathname.startsWith(entry.href));
     return (
       <div
         key={`n-${i}`}
-        className={`nav-item${active === entry.label ? " active" : ""}`}
-        onClick={() => onSelect(entry.label)}
+        className={`nav-item${isActive ? " active" : ""}`}
+        onClick={() => onNavigate(entry.href)}
       >
         <NavIcon name={entry.icon as Icon} />
         {entry.label}
@@ -291,29 +340,29 @@ function renderEntries(
 }
 
 export default function Sidebar() {
-  const [active, setActive] = useState("Overview");
+  const pathname = usePathname();
+  const router = useRouter();
 
   return (
     <nav className="sidebar">
-      {/* ── Main + Tools — flat direct children, no wrapper divs ── */}
       {renderEntries(
         TOP_ITEMS as unknown as readonly Entry[],
-        active,
-        setActive,
+        pathname,
+        router.push,
       )}
-
-      {/* ── Spacer: direct flex child — pushes Account to bottom ── */}
       <div className="sidebar-spacer" />
-
-      {/* ── Account — flat direct children ── */}
       {renderEntries(
         BOTTOM_ITEMS as unknown as readonly Entry[],
-        active,
-        setActive,
+        pathname,
+        router.push,
       )}
 
-      {/* ── User card ── */}
-      <div className="sidebar-user">
+      {/* User card */}
+      <div
+        className="sidebar-user"
+        onClick={() => router.push("/dashboard/profile")}
+        style={{ cursor: "pointer" }}
+      >
         <div className="avatar" style={{ width: 32, height: 32, fontSize: 12 }}>
           JD
         </div>
