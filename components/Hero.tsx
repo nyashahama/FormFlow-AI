@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import Link from "next/link";
 
 export default function Hero() {
   useEffect(() => {
@@ -81,7 +82,7 @@ export default function Hero() {
         </p>
 
         <div className="hero-actions">
-          <a href="#" className="btn-hero">
+          <Link href="/auth/signup" className="btn-hero">
             Get started free
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
               <path
@@ -92,7 +93,7 @@ export default function Hero() {
                 strokeLinejoin="round"
               />
             </svg>
-          </a>
+          </Link>
           <a href="#demo" className="btn-hero-ghost">
             Watch demo
           </a>
