@@ -13,7 +13,7 @@ export default function CtaBand() {
           <em>Start using them.</em>
         </h2>
         <p className="cta-sub">
-          Join 14,000+ individuals, accountants, and agencies who've made
+          Join 14,000+ individuals, accountants, and agencies who&apos;ve made
           government paperwork a one-click task.
         </p>
         <div className="cta-actions">

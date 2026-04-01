@@ -611,7 +611,7 @@ export default function DataSourcesPage() {
               </div>
               <div className="insight-text">
                 <strong>Robinhood re-auth is blocking Form 8949.</strong> The 14
-                capital gains transactions can't be verified until you
+                capital gains transactions can&apos;t be verified until you
                 reconnect. This affects your Schedule D total.
               </div>
             </div>

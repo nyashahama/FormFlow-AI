@@ -9,7 +9,7 @@ export default function AuditTrail() {
           </h2>
           <p className="section-p reveal">
             Every field fill, data pull, and submission is logged and
-            cryptographically signed. Export to your agency's required format
+            cryptographically signed. Export to your agency&apos;s required format
             instantly.
           </p>
 

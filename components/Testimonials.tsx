@@ -5,9 +5,9 @@ export default function Testimonials() {
         <div className="testi-card">
           <div className="testi-stars">★★★★★</div>
           <p className="testi-q">
-            "Filed our business permits in 4 minutes. I used to spend an entire
+            &ldquo;Filed our business permits in 4 minutes. I used to spend an entire
             afternoon on this. The audit log alone is worth the subscription for
-            our accountant."
+            our accountant.&rdquo;
           </p>
           <div className="testi-author">
             <div
@@ -28,8 +28,8 @@ export default function Testimonials() {
         <div className="testi-card">
           <div className="testi-stars">★★★★★</div>
           <p className="testi-q">
-            "We process 80+ tax filings a month for clients. FormFlow cut our
-            per-filing time from 45 minutes to under 6. It's not even close."
+            &ldquo;We process 80+ tax filings a month for clients. FormFlow cut our
+            per-filing time from 45 minutes to under 6. It&apos;s not even close.&rdquo;
           </p>
           <div className="testi-author">
             <div
@@ -50,9 +50,9 @@ export default function Testimonials() {
         <div className="testi-card">
           <div className="testi-stars">★★★★★</div>
           <p className="testi-q">
-            "Our visa application was rejected twice before FormFlow. It caught
-            a field inconsistency we'd never have spotted. Approved on the next
-            attempt."
+            &ldquo;Our visa application was rejected twice before FormFlow. It caught
+            a field inconsistency we&apos;d never have spotted. Approved on the next
+            attempt.&rdquo;
           </p>
           <div className="testi-author">
             <div

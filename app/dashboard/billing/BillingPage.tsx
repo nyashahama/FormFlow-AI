@@ -122,7 +122,7 @@ export default function BillingPage() {
           </div>
           <div className="wb-text">
             <div className="wb-title">
-              You're on the Pro Plan — next billing Apr 1, 2026
+              You&apos;re on the Pro Plan - next billing Apr 1, 2026
             </div>
             <div className="wb-sub">
               $12 / month · Auto-renews · Payment via Visa ···· 4242
